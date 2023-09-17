@@ -10,13 +10,6 @@ const refs = {
     seconds: document.querySelector('span[data-seconds]'),
 }
 
-refs.startBtn.addEventListener('click', onStartClick);
-
-function onStartClick(event) {
-    
-}
-
-
 
 const options = {
     enableTime: true,
@@ -24,11 +17,35 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-      console.log(selectedDates[0]);
+      // console.log(selectedDates[0]);
+     
+      if (selectedDates[0] <= new Date()) {
+        alert("Please choose a date in the future");
+        refs.startBtn.disabled = true;
+      } else {
+        refs.startBtn.disabled = false;
+      }
+
+      setInterval(() => {
+    const timeDelta = targetDate - currentDate;
+}, 1000)
+    
+
     },
 };
 
+refs.startBtn.addEventListener('click', onStartClick);
+
+function onStartClick(event) {
+    const selectedDate = selectedDates[0]; 
+    const currentDate = new Date();
+
+    
+}
+
 flatpickr(refs.inputDate, options);
+
+const targetDate = new Date(refs.inputDate.value).getTime();
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -53,7 +70,7 @@ console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
-const targetDate = new Date(refs.inputDate.value).getTime();
+
 
 setInterval(() => {
     const currentDate = new Date();

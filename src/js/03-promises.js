@@ -20,10 +20,12 @@ console.log(amount);
 // const formInput = {};
 
 function onFormSubmit(event) {
-  // new FormData(event.target).forEach((value, name) => {
-  //   formInput[name] = value;
-  //   console.log(formInput);
-  // })
+  event.preventDefault();
+  
+  new FormData(event.target).forEach((value, name) => {
+    formInput[name] = value;
+    console.log(formInput);
+  })
 
 
 }
